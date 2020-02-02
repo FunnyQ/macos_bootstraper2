@@ -1,0 +1,26 @@
+zh_TW:
+  available_locales:
+    en: English
+    zh_TW: 繁體中文
+
+  locale_menu_message: 請選擇想要使用的語言
+  available_commands: 程式預設會進入 UI 模式。其他可用的 commands 如下：
+  command_usage: '指令'
+  actions:
+    cancel: 取消
+  commands:
+    example:
+      help: A dummy command.
+      command: example
+      args:
+        - '$1: file path'
+    locale:
+      help: 選擇語系
+      command: locale
+      args:
+        - '無可用參數'
+    ui:
+      help: '進入 UI 模式，使用方向鍵選擇要進行的動作'
+      command: ui
+      args:
+        - '無可用參數'

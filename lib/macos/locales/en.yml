@@ -1,0 +1,26 @@
+en:
+  available_locales:
+    en: English
+    zh_TW: 繁體中文
+
+  locale_menu_message: What language do you prefer to use?
+  available_commands: 'Available commands:'
+  command_usage: 'Usage'
+  actions:
+    cancel: Cancel
+  commands:
+    example:
+      help: A dummy command.
+      command: example
+      args:
+        - '$1: file path'
+    locale:
+      help: Change language
+      command: locale
+      args:
+        - 'no arguments.'
+    ui:
+      help: 'open UI mode, choose function from manu.'
+      command: ui
+      args:
+        - 'no arguments.'
