@@ -40,6 +40,9 @@ if [ "$(version "$osx_version")" -lt "$(version "$required_osx_version")" ]; the
   exit
 fi
 
+echo "Installing XCode CL tools.."
+xcode-select --install
+
 if [[ $(command -v brew) == "" ]]; then
   echo "Installing Homebrew.. "
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -47,6 +50,12 @@ else
   echo "Updating Homebrew.. "
   brew update
 fi
+
+info_echo "ensure mas installed..."
+brew tap "Homebrew/bundle" 2> /dev/null
+brew bundle --file=- <<EOF
+brew "mas"
+EOF
 
 info_echo "ensure rbenv installed..."
 brew tap "Homebrew/bundle" 2> /dev/null

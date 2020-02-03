@@ -15,6 +15,7 @@ module Macos
         action = CLI::UI::Prompt.ask(I18n.t()) do |handler|
           handler.option(I18n.t('commands.ui.backup_ssh_and_gpg_keys'))  { |selection| :backup_ssh_and_gpg_keys }
           handler.option(I18n.t('commands.ui.system_basic_setup'))  { |selection| :system_basic_setup }
+          handler.option(I18n.t('commands.ui.setup_dev_env'))  { |selection| :setup_dev_env }
           handler.option(I18n.t('commands.ui.setup_macos_preferences'))  { |selection| :setup_macos_preferences }
           handler.option(I18n.t('actions.cancel')) { |selection| :cancel }
         end
@@ -66,6 +67,19 @@ module Macos
         script = File.open("#{SCRIPTS_PATH}/basic_setup.sh")
 
         system "zsh #{script.path}"
+      end
+
+      def setup_dev_env
+        clear_screen
+
+        CLI::UI::Frame.open(I18n.t('commands.ui.system_basic_setup'), color: :green) do
+          puts CLI::UI.fmt I18n.t('commands.ui.system_basic_setup_message')
+        end
+
+        script = File.open("#{SCRIPTS_PATH}/setup_dev_env.sh")
+        brewfile = File.open("#{SCRIPTS_PATH}/Brewfile")
+
+        system "zsh #{script.path} #{brewfile.path}"
       end
 
       def setup_macos_preferences
