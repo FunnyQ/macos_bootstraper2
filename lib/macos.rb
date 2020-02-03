@@ -16,6 +16,7 @@ module Macos
   LOCALE_PREFERENCES_PATH = './preferences/locale.txt'.freeze
 
   autoload(:LocaleConfig, 'macos/locale_config')
+  autoload(:SystemPreferences, 'macos/system_preferences')
   autoload(:EntryPoint,   'macos/entry_point')
   autoload(:Commands,     'macos/commands')
 
