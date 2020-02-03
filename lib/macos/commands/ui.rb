@@ -69,6 +69,7 @@ module Macos
         Macos::SystemPreferences.keyboard
         Macos::SystemPreferences.trackpad
         Macos::SystemPreferences.system_config
+        Macos::SystemPreferences.restart_apps
 
         puts ''
         puts CLI::UI.fmt %({{green:#{I18n.t(:done_and_need_reboot)}}})

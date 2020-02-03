@@ -42,6 +42,9 @@ module Macos
       puts '  - Use list view in all Finder windows by default'
       system 'defaults write com.apple.Finder FXPreferredViewStyle "Nlsv"'
 
+      puts '  - keep folders on top'
+      system 'defaults write com.apple.finder _FXSortFoldersFirst -bool true'
+
       puts '  - Enable AirDrop over Ethernet and on unsupported Macs running Lion'
       system 'defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true'
 
@@ -74,7 +77,7 @@ module Macos
       puts '  - Disable automatic capitalization'
       system 'defaults write -g NSAutomaticCapitalizationEnabled -bool false'
 
-      puts 'Enable full keyboard access for all controls'
+      puts '  - Enable full keyboard access for all controls'
       system 'defaults write NSGlobalDomain AppleKeyboardUIMode -int 3'
 
       puts '  - Disable automatic period substitution'
@@ -104,6 +107,12 @@ module Macos
 
       puts '  - Prevent from prompting to use new hard drives as backup volume'
       system 'defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true'
+    end
+
+    def self.restart_apps
+      ['cfprefsd', 'Dock', 'Finder', 'Safari', 'SystemUIServer'].each do |app|
+        system %(killall "#{app}" > /dev/null 2>&1 || true)
+      end
     end
   end
 end
