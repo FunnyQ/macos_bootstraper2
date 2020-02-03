@@ -106,3 +106,16 @@ cask "subler"
 cask "transmission"
 cask "geotag-photos-pro"
 cask "openemu"
+
+mas "Keynote", id: 409183694
+mas "Pages", id: 409201541
+mas "Numbers", id: 409203825
+mas "1Password", id: 443987910
+mas "OpenConv", id: 892308325
+mas "Hidden Bar", id: 1452453066
+mas "iStat Menus", id: 1319778037
+mas "Byword", id: 420212497
+mas "Spark", id: 1176895641
+mas "Moom", id: 419330170
+mas "LINE", id: 539883307
+mas "SnippetsLab", id: 1006087419
