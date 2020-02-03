@@ -7,7 +7,7 @@ zh_TW:
   available_commands: 程式預設會進入 UI 模式。其他可用的 commands 如下：
   current_macos_version_is_x: 目前使用的 macOS 版本為 %{x}
   please_choose_action: 現在想要執行的動作是？
-  command_usage: '指令'
+  command_usage: "指令"
   done: 已完成
   done_and_need_reboot: 已完成，部分內容可能需要重新啟動系統才能生效。
   actions:
@@ -17,19 +17,22 @@ zh_TW:
       help: A dummy command.
       command: example
       args:
-        - '$1: file path'
+        - "$1: file path"
     locale:
       help: 選擇語系
       command: locale
       args:
-        - '無可用參數'
+        - "無可用參數"
     ui:
-      help: '進入 UI 模式，使用方向鍵選擇要進行的動作'
+      help: "進入 UI 模式，使用方向鍵選擇要進行的動作"
       command: ui
       backup_ssh_and_gpg_keys: 備份 SSH 和 GPG 金鑰
-      backup_ssh_and_gpg_keys_message: 將會備份 `~/.ssh` 和 `~/.gnupg` 到指定的路徑。
+      backup_ssh_and_gpg_keys_message: "將會備份 `~/.ssh` 和 `~/.gnupg` 到指定的路徑。\n請將備份後的檔案保存至外接儲存裝置，於安裝到新電腦時使用。"
+      backup_path: 要將備份儲存到哪裡？
+      system_basic_setup: 安裝基本系統軟體
+      system_basic_setup_message: "這個動作將會：\n  - 更新 macOS\n  - 安裝 homebrew\n  - 安裝 o-my-zsh\n  - 用 rbenv 安裝 ruby\n  - 用 nvm 安裝 nodejs"
       setup_macos_preferences: 設定 macOS 的系統偏好
       setup_macos_preferences_message: "這個動作將會：\n  - 調整 dock 的尺寸\n  - 調整 Finder 設定（顯示副檔名...等）\n  - 鍵盤設定（關閉自動建議、加快 repeat 速度...等）\n  - 觸控板設定（tap to click）\n  - 調整休眠模式\n  - 防止新硬碟掛載時詢問要不用用來備份"
       canceled: 已離開程式，沒有進行任何更動。
       args:
-        - '無可用參數'
+        - "無可用參數"

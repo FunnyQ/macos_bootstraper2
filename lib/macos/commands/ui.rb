@@ -14,6 +14,7 @@ module Macos
 
         action = CLI::UI::Prompt.ask(I18n.t()) do |handler|
           handler.option(I18n.t('commands.ui.backup_ssh_and_gpg_keys'))  { |selection| :backup_ssh_and_gpg_keys }
+          handler.option(I18n.t('commands.ui.system_basic_setup'))  { |selection| :system_basic_setup }
           handler.option(I18n.t('commands.ui.setup_macos_preferences'))  { |selection| :setup_macos_preferences }
           handler.option(I18n.t('actions.cancel')) { |selection| :cancel }
         end
@@ -39,11 +40,11 @@ module Macos
       def backup_ssh_and_gpg_keys
         clear_screen
 
-        CLI::UI::Frame.open('Backup SSH and GPG keys', color: :green) do
+        CLI::UI::Frame.open(I18n.t('commands.ui.backup_ssh_and_gpg_keys'), color: :green) do
           puts CLI::UI.fmt I18n.t('commands.ui.backup_ssh_and_gpg_keys_message')
         end
 
-        target_path = CLI::UI::Prompt.ask('where to store backup?', default: '~/macos_backups/dotfiles')
+        target_path = CLI::UI::Prompt.ask(I18n.t('commands.ui.backup_path'), default: '~/macos_backups/dotfiles')
 
         CLI::UI::Spinner.spin('coping files...') do |spinner|
           system "mkdir -p #{target_path}"
@@ -53,6 +54,18 @@ module Macos
 
         puts ''
         puts CLI::UI.fmt %({{green:#{I18n.t(:done)}}})
+      end
+
+      def system_basic_setup
+        clear_screen
+
+        CLI::UI::Frame.open(I18n.t('commands.ui.system_basic_setup'), color: :green) do
+          puts CLI::UI.fmt I18n.t('commands.ui.system_basic_setup_message')
+        end
+
+        script = File.open("#{SCRIPTS_PATH}/basic_setup.sh")
+
+        system "zsh #{script.path}"
       end
 
       def setup_macos_preferences

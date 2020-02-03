@@ -4,10 +4,10 @@ en:
     zh_TW: 繁體中文
 
   locale_menu_message: What language do you prefer to use?
-  available_commands: 'This script will fire up UI mode by default. Other available commands are below:'
+  available_commands: "This script will fire up UI mode by default. Other available commands are below:"
   current_macos_version_is_x: current macOS version is %{x}
   please_choose_action: Which action do you prefer to exec now?
-  command_usage: 'Usage'
+  command_usage: "Usage"
   done: Done
   done_and_need_reboot: Done. Some changes maybe need reboot to take effect.
   actions:
@@ -17,19 +17,22 @@ en:
       help: A dummy command.
       command: example
       args:
-        - '$1: file path'
+        - "$1: file path"
     locale:
       help: Change language
       command: locale
       args:
-        - 'no arguments.'
+        - "no arguments."
     ui:
-      help: 'open UI mode, choose function from manu.'
+      help: "open UI mode, choose function from manu."
       command: ui
       backup_ssh_and_gpg_keys: Backup SSH and PGP keys
-      backup_ssh_and_gpg_keys_message: '`~/.ssh` and `~/.gnupg` will be copy to target path.'
+      backup_ssh_and_gpg_keys_message: "`~/.ssh` and `~/.gnupg` will be copy to target path."
+      system_basic_setup: Install basic system softwares
+      system_basic_setup_message: "This action will：\n  - update macOS\n  - install homebrew\n  - install o-my-zsh\n  - install ruby with rbenv\n  - install nodejs with nvm"
       setup_macos_preferences: setup macOS system preferences
       setup_macos_preferences_message: "This action will：\n  - adjust dock size\n  - config Finder（show file extensions...etc）\n  - config keyboard（disable auto-correct、make repeat faster...etc）\n  - config touchpad（tap to click）\n  - change hibernatemode\n  - Prevent from prompting to use new hard drives as backup volume"
+      system_basic_setup: install basic system softwares.
       canceled: script stopped. there are no change to system.
       args:
-        - 'no arguments.'
+        - "no arguments."

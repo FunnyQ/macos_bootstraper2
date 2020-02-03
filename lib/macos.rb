@@ -14,6 +14,7 @@ module Macos
   LOG_FILE  = '/tmp/macos.log'.freeze
   DEFAULT_LOCALE = :zh_TW
   LOCALE_PREFERENCES_PATH = './preferences/locale.txt'.freeze
+  SCRIPTS_PATH = './lib/macos/scripts'
 
   autoload(:LocaleConfig, 'macos/locale_config')
   autoload(:SystemPreferences, 'macos/system_preferences')
