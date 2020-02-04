@@ -8,9 +8,10 @@ module Macos
 
         clear_screen
 
-        CLI::UI::Frame.open('macOS Bootstraper', color: :green) do
-          puts CLI::UI.fmt I18n.t(:current_macos_version_is_x, x: macos_version)
-        end
+
+        CLI::UI::Frame.open('macOS Bootstraper', color: :green)
+        puts CLI::UI.fmt I18n.t(:current_macos_version_is_x, x: macos_version)
+        CLI::UI::Frame.close(" #{`pwd`}", color: :green)
 
         action = CLI::UI::Prompt.ask(I18n.t()) do |handler|
           handler.option(I18n.t('commands.ui.backup_ssh_and_gpg_keys'))  { |selection| :backup_ssh_and_gpg_keys }
