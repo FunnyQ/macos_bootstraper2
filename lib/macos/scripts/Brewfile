@@ -65,7 +65,7 @@ brew "puma-dev"
 
 # Essential Mac applications
 # --- BASIC TOOLS ---
-cask "alfred"
+cask "alfred3"
 cask "iterm2"
 cask "dropbox"
 cask "karabiner-elements"
