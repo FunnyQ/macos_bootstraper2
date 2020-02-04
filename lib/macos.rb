@@ -1,7 +1,6 @@
 require 'cli/ui'
 require 'cli/kit'
 require 'i18n'
-require 'byebug'
 
 
 CLI::UI::StdoutRouter.enable
