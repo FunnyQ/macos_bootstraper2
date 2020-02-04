@@ -72,8 +72,8 @@ module Macos
       def setup_dev_env
         clear_screen
 
-        CLI::UI::Frame.open(I18n.t('commands.ui.system_basic_setup'), color: :green) do
-          puts CLI::UI.fmt I18n.t('commands.ui.system_basic_setup_message')
+        CLI::UI::Frame.open(I18n.t('commands.ui.setup_dev_env'), color: :green) do
+          puts CLI::UI.fmt I18n.t('commands.ui.setup_dev_env_message')
         end
 
         script = File.open("#{SCRIPTS_PATH}/setup_dev_env.sh")
