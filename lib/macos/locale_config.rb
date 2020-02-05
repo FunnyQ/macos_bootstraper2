@@ -14,7 +14,7 @@ module Macos
 
         preferences_file.readline
       else
-        FileUtils.mkdir_p(File.dirname(LOCALE_PREFERENCES_PATH))
+        system "mkdir -p #{File.dirname(LOCALE_PREFERENCES_PATH)}"
         preferences_file = File.open(LOCALE_PREFERENCES_PATH, 'w')
 
         preferences_file.write(DEFAULT_LOCALE)
