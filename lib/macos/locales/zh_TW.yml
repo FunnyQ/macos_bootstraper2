@@ -35,6 +35,10 @@ zh_TW:
       setup_dev_env_message: 透過 homebrew 安裝開發時需要的各種軟體
       setup_macos_preferences: 設定 macOS 的系統偏好
       setup_macos_preferences_message: "這個動作將會：\n  - 調整 dock 的尺寸\n  - 調整 Finder 設定（顯示副檔名...等）\n  - 鍵盤設定（關閉自動建議、加快 repeat 速度...等）\n  - 觸控板設定（tap to click）\n  - 調整休眠模式\n  - 防止新硬碟掛載時詢問要不用用來備份"
+      create_ramdisk: 建立 RamDisk
+      create_ramdisk_message: RamDisk 可以用來暫時存放一些敏感資訊，例如管理 GPG keys 的匯入匯出時可以使用。
+      disk_name: RamDisk 掛載時使用的名稱
+      disk_size: RamDisk 的容量需要幾 G（使用期間會佔用電腦可用的 RAM）
       canceled: 已離開程式，沒有進行任何更動。
       args:
         - "無可用參數"

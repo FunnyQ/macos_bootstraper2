@@ -18,6 +18,7 @@ module Macos
           handler.option(I18n.t('commands.ui.system_basic_setup'))  { |selection| :system_basic_setup }
           handler.option(I18n.t('commands.ui.setup_dev_env'))  { |selection| :setup_dev_env }
           handler.option(I18n.t('commands.ui.setup_macos_preferences'))  { |selection| :setup_macos_preferences }
+          handler.option(I18n.t('commands.ui.create_ramdisk'))  { |selection| :create_ramdisk }
           handler.option(I18n.t('actions.cancel')) { |selection| :cancel }
         end
 
@@ -101,6 +102,21 @@ module Macos
 
         puts ''
         puts CLI::UI.fmt %({{green:#{I18n.t(:done_and_need_reboot)}}})
+      end
+
+      def create_ramdisk
+        clear_screen
+
+        CLI::UI::Frame.open(I18n.t('commands.ui.create_ramdisk'), color: :green) do
+          puts CLI::UI.fmt I18n.t('commands.ui.create_ramdisk_message')
+        end
+
+        disk_name = CLI::UI::Prompt.ask(I18n.t('commands.ui.disk_name'), default: 'RamDisk')
+        disk_size = CLI::UI::Prompt.ask(I18n.t('commands.ui.disk_size'), default: '1')
+
+        CLI::UI::Spinner.spin("Creating #{disk_name}...") do |spinner|
+          system %(diskutil erasevolume HFS+ "#{disk_name}" `hdiutil attach -nomount ram://$((#{disk_size}*2097152))` > /dev/null)
+        end
       end
 
       def exit_script
