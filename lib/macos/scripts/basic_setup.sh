@@ -31,7 +31,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Check macOS version
-required_osx_version="10.14.0"
+required_osx_version="11.1"
 osx_version=$(/usr/bin/sw_vers -productVersion)
 
 info_echo "Checking macOS version"
@@ -43,73 +43,98 @@ fi
 echo "Installing XCode CL tools.."
 xcode-select --install
 
+# identify CPU architecture
+cpu_architecture="$(uname -m)"
+
+alias try_use_x86=""
+alias try_use_x86_brew="brew"
+alias try_use_arm_brew="brew"
+
+if [[ $cpu_architecture == "arm64" ]]; then
+
+  echo "Installing Rosetta 2.."
+  /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+
+  alias try_use_x86="arch -x86_64"
+  alias try_use_x86_brew="arch -x86_64 /usr/local/homebrew/bin/brew"
+  alias try_use_arm_brew="arch -arm64 /opt/homebrew/bin/brew"
+fi
+
+# Homebrew
 if [[ $(command -v brew) == "" ]]; then
-  echo "Installing Homebrew.. "
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  echo "Installing Homebrew in x86 arch.. "
+  try_use_x86 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if [[ $cpu_architecture == "arm64" ]]; then
+    echo "Installing Homebrew in arm64 arch.. "
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 else
   echo "Updating Homebrew.. "
   brew update
 fi
 
-info_echo "ensure mas installed..."
+# install basic tools via homebrew
+info_echo "installing basic tools..."
 brew tap "Homebrew/bundle" 2> /dev/null
-brew bundle --file=- <<EOF
+try_use_arm_brew bundle --file=- <<EOF
+brew 'autoconf'
+brew 'curl-openssl'
+brew 'gnupg'
+brew 'libevent'
+brew 'libtool'
+brew 'libyaml'
+brew 'vim'
+brew 'z'
+brew 'bat'
+brew 'asdf'
+EOF
+try_use_x86_brew bundle --file= <<EOF
+brew 'exa'
 brew "mas"
 EOF
 
-info_echo "ensure rbenv installed..."
-brew tap "Homebrew/bundle" 2> /dev/null
-brew bundle --file=- <<EOF
-brew "rbenv"
-brew 'ruby-build'
-brew 'rbenv-default-gems'
-EOF
+# config for asdf
+if [ ! -f ~/.asdfrc ]; then
+cat > ~/.asdfrc <<EOF
+  legacy_version_file = yes
 
-info_echo "ensure nvm installed"
-brew bundle --file=- <<EOF
-brew "nvm"
 EOF
+fi
 
 info_echo "Installing o-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-# sudo chsh -s $(which zsh) $(whoami)
 
-info_echo "Enable rbenv alias"
-eval "$(rbenv init -)"
-
-if [[ ! -f "$(brew --prefix rbenv)/default-gems" ]]; then
-  info_echo "Set default gems list"
-  echo "bundler" >> "$(brew --prefix rbenv)/default-gems"
-  echo "rails" >> "$(brew --prefix rbenv)/default-gems"
-fi
-
-ruby_version="2.6.5"
+# install ruby
+ruby_version="2.7.3"
 info_echo "ensure Ruby $ruby_version installed..."
-if test -z "$(rbenv versions --bare|grep $ruby_version)"; then
-  rbenv install $ruby_version
+if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
+  # set bundler as default gems
+  if [ ! -f ~/.default-gems ]; then
+cat > ~/.default-gems <<EOF
+  bundler
+
+EOF
+  fi
+
+  try_use_x86 asdf install ruby $ruby_version
 
   info_echo "Set Ruby $ruby_version as global default Ruby"
-  rbenv global $ruby_version
+  asdf global ruby $ruby_version
 
   info_echo "Update to latest Rubygems version"
   gem update --system --no-document
 fi
 
-info_echo "Enable NVM alias"
-# we need disable -e during sourcing nvm.sh b/c of
-# https://github.com/creationix/nvm/issues/721
-# https://github.com/travis-ci/travis-ci/issues/3854#issuecomment-99492695
-set +e
-source "$(brew --prefix nvm)/nvm.sh"
-set -e
-
-
+# install nodejs
 info_echo "Install Node.js LTS version"
-nvm install --lts
+nodejs_version="14.15.3"
+if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
+  bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
+  try_use_x86 asdf install nodejs $nodejs_version
 
-
-info_echo "Set latest Node.js version as global default Node"
-nvm use --lts
+  info_echo "Set nodejs $ruby_version as global default"
+  asdf global nodejs $nodejs_version
+fi
 
 export npm_config_global=true
 export npm_config_loglevel=silent

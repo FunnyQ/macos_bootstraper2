@@ -30,8 +30,97 @@ sudo -v
 # Keep alive Root
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-info_echo "Install Brew formalue"
-brew tap "Homebrew/bundle" 2> /dev/null
-brew bundle --file=$1
+# identify CPU architecture
+cpu_architecture="$(uname -m)"
+
+alias try_use_x86=""
+alias try_use_x86_brew="brew"
+alias try_use_arm_brew="brew"
+
+if [[ $cpu_architecture == "arm64" ]]; then
+  alias try_use_x86="arch -x86_64"
+  alias try_use_x86_brew="arch -x86_64 /usr/local/homebrew/bin/brew"
+  alias try_use_arm_brew="arch -arm64 /opt/homebrew/bin/brew"
+fi
+
+tap 'heroku/brew'
+tap 'puma/puma'
+try_use_arm_brew bundle --file=- <<EOF
+brew 'advancecomp'
+brew 'ansible'
+brew 'emojify'
+brew 'geckodriver'
+brew 'gifsicle'
+brew 'git'
+brew 'pinentry-mac'
+brew 'graphviz'
+brew 'heroku'
+brew 'htop'
+brew 'httpie'
+brew 'imagemagick'
+brew 'jhead'
+brew 'jonof/kenutils/pngout'
+brew 'jpeg'
+brew 'jpegoptim'
+brew 'mackup'
+brew 'optipng'
+brew 'overmind'
+brew 'perl'
+brew 'pngcrush'
+brew 'pngquant'
+brew 'ssh-copy-id'
+brew 'terminal-notifier'
+brew 'tree'
+brew 'watch'
+brew 'watchman'
+brew 'yarn'
+brew 'zsh'
+brew 'puma-dev'
+brew 'up'
+
+cask 'alfred3'
+cask 'iterm2'
+cask 'dropbox'
+cask 'karabiner-elements'
+cask 'keka'
+cask 'keybase'
+cask 'ngrok'
+cask 'sequel-pro'
+cask 'psequel'
+cask 'resilio-sync'
+cask 'flux'
+
+cask 'font-fira-code'
+cask 'font-source-code-pro-for-powerline'
+cask 'font-hack-nerd-font'
+cask 'font-public-sans'
+cask 'font-jetbrains-mono-nerd-font'
+
+cask 'visual-studio-code-insiders'
+cask 'fork'
+cask 'imageoptim'
+cask 'insomnia'
+cask 'postman'
+cask 'vagrant'
+cask 'vagrant-manager'
+cask 'xquartz'
+cask 'sketch'
+cask 'calibre'
+cask 'sigil'
+cask 'spotify'
+cask 'subler'
+cask 'transmission'
+cask 'geotag-photos-pro'
+cask 'openemu'
+
+cask 'google-chrome'
+cask 'firefox-developer-edition'
+cask 'microsoft-edge'
+cask 'welly'
+EOF
+
+# try_use_x86_brew bundle --file= <<EOF
+
+# EOF
 
 brew doctor && brew update && brew cleanup && brew upgrade && brew cask upgrade && mas upgrade
