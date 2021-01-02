@@ -28,6 +28,7 @@ en:
       command: ui
       backup_ssh_and_gpg_keys: Backup SSH and PGP keys
       backup_ssh_and_gpg_keys_message: "`~/.ssh` and `~/.gnupg` will be copy to target path."
+      backup_path: enter backup path please.
       system_basic_setup: Install basic system softwares
       system_basic_setup_message: "This action will：\n  - update macOS\n  - install homebrew\n  - install o-my-zsh\n  - install ruby with rbenv\n  - install nodejs with nvm"
       setup_dev_env: Setup development environment.

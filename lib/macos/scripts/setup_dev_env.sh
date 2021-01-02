@@ -89,6 +89,7 @@ cask 'sequel-pro'
 cask 'psequel'
 cask 'resilio-sync'
 cask 'flux'
+cask 'discord'
 
 cask 'font-fira-code'
 cask 'font-source-code-pro-for-powerline'
