@@ -52,7 +52,6 @@ brew 'emojify'
 brew 'geckodriver'
 brew 'gifsicle'
 brew 'git'
-brew 'pinentry-mac'
 brew 'graphviz'
 brew 'heroku'
 brew 'htop'
@@ -62,21 +61,23 @@ brew 'jhead'
 brew 'jonof/kenutils/pngout'
 brew 'jpeg'
 brew 'jpegoptim'
+brew 'libpq'
 brew 'mackup'
 brew 'optipng'
 brew 'overmind'
 brew 'perl'
+brew 'pinentry-mac'
 brew 'pngcrush'
 brew 'pngquant'
+brew 'puma-dev'
 brew 'ssh-copy-id'
 brew 'terminal-notifier'
 brew 'tree'
+brew 'up'
 brew 'watch'
 brew 'watchman'
 brew 'yarn'
 brew 'zsh'
-brew 'puma-dev'
-brew 'up'
 
 cask 'alfred3'
 cask 'iterm2'
@@ -120,8 +121,8 @@ cask 'microsoft-edge'
 cask 'welly'
 EOF
 
-# try_use_x86_brew bundle --file= <<EOF
-
-# EOF
+try_use_x86_brew bundle --file= <<EOF
+brew 'postgresql'
+EOF
 
 brew doctor && brew update && brew cleanup && brew upgrade && brew cask upgrade && mas upgrade
