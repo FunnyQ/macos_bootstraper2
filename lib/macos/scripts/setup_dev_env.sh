@@ -43,9 +43,10 @@ if [[ $cpu_architecture == "arm64" ]]; then
   alias try_use_arm_brew="arch -arm64 /opt/homebrew/bin/brew"
 fi
 
+try_use_arm_brew bundle --file=- <<EOF
 tap 'heroku/brew'
 tap 'puma/puma'
-try_use_arm_brew bundle --file=- <<EOF
+
 brew 'advancecomp'
 brew 'ansible'
 brew 'emojify'
