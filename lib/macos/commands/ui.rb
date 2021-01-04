@@ -8,18 +8,17 @@ module Macos
 
         clear_screen
 
-
         CLI::UI::Frame.open('macOS Bootstraper', color: :green)
         puts CLI::UI.fmt I18n.t(:current_macos_version_is_x, x: macos_version)
         CLI::UI::Frame.close(" #{`pwd`}", color: :green)
 
-        action = CLI::UI::Prompt.ask(I18n.t()) do |handler|
-          handler.option(I18n.t('commands.ui.backup_ssh_and_gpg_keys'))  { |selection| :backup_ssh_and_gpg_keys }
-          handler.option(I18n.t('commands.ui.system_basic_setup'))  { |selection| :system_basic_setup }
-          handler.option(I18n.t('commands.ui.setup_dev_env'))  { |selection| :setup_dev_env }
-          handler.option(I18n.t('commands.ui.setup_macos_preferences'))  { |selection| :setup_macos_preferences }
-          handler.option(I18n.t('commands.ui.create_ramdisk'))  { |selection| :create_ramdisk }
-          handler.option(I18n.t('actions.cancel')) { |selection| :cancel }
+        action = CLI::UI::Prompt.ask(I18n.t) do |handler|
+          handler.option(I18n.t('commands.ui.backup_ssh_and_gpg_keys')) { |_selection| :backup_ssh_and_gpg_keys }
+          handler.option(I18n.t('commands.ui.system_basic_setup')) { |_selection| :system_basic_setup }
+          handler.option(I18n.t('commands.ui.setup_dev_env')) { |_selection| :setup_dev_env }
+          handler.option(I18n.t('commands.ui.setup_macos_preferences')) { |_selection| :setup_macos_preferences }
+          handler.option(I18n.t('commands.ui.create_ramdisk')) { |_selection| :create_ramdisk }
+          handler.option(I18n.t('actions.cancel')) { |_selection| :cancel }
         end
 
         # puts CLI::UI.fmt '{{red:please input your password for `sudo`.}}'
@@ -49,7 +48,7 @@ module Macos
 
         target_path = CLI::UI::Prompt.ask(I18n.t('commands.ui.backup_path'), default: '~/macos_backups/dotfiles')
 
-        CLI::UI::Spinner.spin('coping files...') do |spinner|
+        CLI::UI::Spinner.spin('coping files...') do |_spinner|
           system "mkdir -p #{target_path}"
           system "cp -r ~/.ssh #{target_path}/ssh"
           system "cp -r ~/.gnupg #{target_path}/gnupg"
@@ -79,9 +78,8 @@ module Macos
         end
 
         script = File.open("#{SCRIPTS_PATH}/setup_dev_env.sh")
-        brewfile = File.open("#{SCRIPTS_PATH}/Brewfile")
 
-        system "zsh #{script.path} #{brewfile.path}"
+        system "zsh #{script.path}"
       end
 
       def setup_macos_preferences
@@ -114,7 +112,7 @@ module Macos
         disk_name = CLI::UI::Prompt.ask(I18n.t('commands.ui.disk_name'), default: 'RamDisk')
         disk_size = CLI::UI::Prompt.ask(I18n.t('commands.ui.disk_size'), default: '1')
 
-        CLI::UI::Spinner.spin("Creating #{disk_name}...") do |spinner|
+        CLI::UI::Spinner.spin("Creating #{disk_name}...") do |_spinner|
           system %(diskutil erasevolume HFS+ "#{disk_name}" `hdiutil attach -nomount ram://$((#{disk_size}*2097152))` > /dev/null)
         end
       end
