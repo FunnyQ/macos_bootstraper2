@@ -76,7 +76,7 @@ fi
 # install basic tools via homebrew
 info_echo "installing basic tools..."
 brew tap "Homebrew/bundle" 2> /dev/null
-try_use_arm_brew bundle --file=- <<EOF
+try_use_arm_brew bundle --file=-<<EOF
 brew 'autoconf'
 brew 'curl-openssl'
 brew 'gnupg'
@@ -88,7 +88,7 @@ brew 'z'
 brew 'bat'
 brew 'asdf'
 EOF
-try_use_x86_brew bundle --file= <<EOF
+try_use_x86_brew bundle --file=-<<EOF
 brew 'exa'
 brew "mas"
 EOF
@@ -105,7 +105,7 @@ info_echo "Installing o-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # install ruby
-ruby_version="2.7.3"
+ruby_version="2.7.2"
 info_echo "ensure Ruby $ruby_version installed..."
 if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
   # set bundler as default gems
