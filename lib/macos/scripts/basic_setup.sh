@@ -62,12 +62,14 @@ fi
 
 # Homebrew
 if [[ $(command -v brew) == "" ]]; then
-  echo "Installing Homebrew in x86 arch.. "
-  try_use_x86 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   if [[ $cpu_architecture == "arm64" ]]; then
     echo "Installing Homebrew in arm64 arch.. "
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    echo 'export PATH=/opt/homebrew/bin:$PATH' >> $HOME/.zshrc
   fi
+  echo "Installing Homebrew in x86 arch.. "
+  try_use_x86 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  echo 'export PATH=/usr/local/homebrew/bin:$PATH' >> $HOME/.zshrc
 else
   echo "Updating Homebrew.. "
   brew update
@@ -75,35 +77,37 @@ fi
 
 # install basic tools via homebrew
 info_echo "installing basic tools..."
-brew tap "Homebrew/bundle" 2> /dev/null
-try_use_arm_brew bundle --file=-<<EOF
-brew 'autoconf'
-brew 'curl-openssl'
-brew 'gnupg'
-brew 'libevent'
-brew 'libtool'
-brew 'libyaml'
-brew 'vim'
-brew 'z'
-brew 'bat'
-brew 'asdf'
-EOF
-try_use_x86_brew bundle --file=-<<EOF
-brew 'exa'
-brew "mas"
-EOF
+
+try_use_arm_brew install autoconf
+try_use_arm_brew install curl-openssl
+try_use_arm_brew install gnupg
+try_use_arm_brew install libevent
+try_use_arm_brew install libtool
+try_use_arm_brew install libyaml
+try_use_arm_brew install vim
+try_use_arm_brew install z
+try_use_arm_brew install bat
+
+try_use_x86_brew install exa
+try_use_x86_brew install mas
 
 # config for asdf
 if [ ! -f ~/.asdfrc ]; then
-info_echo ".asdfrc not existed, will create one for support legacy version files..."
+  info_echo "install asdf"
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+  echo '. $HOME/.asdf/asdf.sh' >> $HOME/.zshrc
+  info_echo ".asdfrc not existed, will create one for support legacy version files..."
 cat > ~/.asdfrc <<EOF
   legacy_version_file = yes
 
 EOF
 fi
 
-info_echo "Installing o-my-zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+if [ ! -f ~/.oh-my-zsh ]; then
+  info_echo "Installing o-my-zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  cat $HOME/.zshrc $HOME/.zshrc.pre-oh-my-zsh > $HOME/.zshrc
+fi
 
 # install ruby
 ruby_version="2.7.2"
@@ -116,8 +120,9 @@ cat > ~/.default-gems <<EOF
 
 EOF
   fi
+  asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 
-  try_use_x86 asdf install ruby $ruby_version
+  asdf install ruby $ruby_version
 
   info_echo "Set Ruby $ruby_version as global default Ruby"
   asdf global ruby $ruby_version
@@ -129,11 +134,13 @@ fi
 # install nodejs
 info_echo "Install Node.js LTS version"
 nodejs_version="14.15.3"
-if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
+if test -z "$(asdf list nodejs --bare|grep $nodejs_version)"; then
+
+  asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
   try_use_x86 asdf install nodejs $nodejs_version
 
-  info_echo "Set nodejs $ruby_version as global default"
+  info_echo "Set nodejs $nodejs_version as global default"
   asdf global nodejs $nodejs_version
 fi
 
