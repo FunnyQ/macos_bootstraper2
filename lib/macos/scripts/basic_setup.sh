@@ -95,6 +95,7 @@ EOF
 
 # config for asdf
 if [ ! -f ~/.asdfrc ]; then
+info_echo ".asdfrc not existed, will create one for support legacy version files..."
 cat > ~/.asdfrc <<EOF
   legacy_version_file = yes
 

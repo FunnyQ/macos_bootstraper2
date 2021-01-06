@@ -71,6 +71,7 @@ brew 'pinentry-mac'
 brew 'pngcrush'
 brew 'pngquant'
 brew 'puma-dev'
+brew 'readline'
 brew 'ssh-copy-id'
 brew 'terminal-notifier'
 brew 'tree'
@@ -89,7 +90,6 @@ cask 'keybase'
 cask 'ngrok'
 cask 'sequel-pro'
 cask 'psequel'
-cask 'resilio-sync'
 cask 'flux'
 cask 'discord'
 
@@ -124,6 +124,7 @@ EOF
 
 try_use_x86_brew bundle --file=-<<EOF
 brew 'postgresql'
+brew 'readline'
 EOF
 
 brew doctor && brew update && brew cleanup && brew upgrade && brew cask upgrade && mas upgrade
