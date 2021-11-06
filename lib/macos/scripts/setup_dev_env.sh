@@ -33,9 +33,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # identify CPU architecture
 cpu_architecture="$(uname -m)"
 
-# get osx version
-osx_version=$(/usr/bin/sw_vers -productVersion)
-
 alias try_use_x86=""
 alias try_use_x86_brew="brew"
 alias try_use_arm_brew="brew"
@@ -139,8 +136,7 @@ try_use_arm_brew install --cask 'vagrant'
 try_use_arm_brew install --cask 'vagrant-manager'
 try_use_arm_brew install --cask 'visual-studio-code'
 
-if [ "$(version "$osx_version")" -lt "$(version "12.0")" ]; then
-  try_use_arm_brew bundle --file=-<<EOF
+try_use_arm_brew bundle --file=-<<EOF
 mas 'Keynote', id: 409_183_694
 mas 'Pages', id: 409_201_541
 mas 'Numbers', id: 409_203_825
