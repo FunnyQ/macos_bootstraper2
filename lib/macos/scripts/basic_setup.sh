@@ -87,9 +87,13 @@ try_use_arm_brew install libyaml
 try_use_arm_brew install vim
 try_use_arm_brew install z
 try_use_arm_brew install bat
+try_use_arm_brew install exa
+try_use_arm_brew install mas
 
-try_use_x86_brew install exa
-try_use_x86_brew install mas
+if [ ! -f ~/.oh-my-zsh ]; then
+  info_echo "Installing o-my-zsh..."
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 # config for asdf
 if [ ! -f ~/.asdfrc ]; then
@@ -101,16 +105,11 @@ cat > ~/.asdfrc <<EOF
   legacy_version_file = yes
 
 EOF
-fi
-
-if [ ! -f ~/.oh-my-zsh ]; then
-  info_echo "Installing o-my-zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  cat $HOME/.zshrc $HOME/.zshrc.pre-oh-my-zsh > $HOME/.zshrc
+source ~/.zshrc
 fi
 
 # install ruby
-ruby_version="2.7.2"
+ruby_version="3.0.2"
 info_echo "ensure Ruby $ruby_version installed..."
 if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
   # set bundler as default gems
@@ -133,7 +132,7 @@ fi
 
 # install nodejs
 info_echo "Install Node.js LTS version"
-nodejs_version="14.15.3"
+nodejs_version="14.18.1"
 if test -z "$(asdf list nodejs --bare|grep $nodejs_version)"; then
 
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git

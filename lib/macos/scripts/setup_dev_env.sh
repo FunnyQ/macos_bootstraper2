@@ -33,6 +33,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # identify CPU architecture
 cpu_architecture="$(uname -m)"
 
+# get osx version
+osx_version=$(/usr/bin/sw_vers -productVersion)
+
 alias try_use_x86=""
 alias try_use_x86_brew="brew"
 alias try_use_arm_brew="brew"
@@ -50,15 +53,17 @@ try_use_arm_brew tap 'homebrew/cask-fonts'
 try_use_arm_brew tap 'homebrew/cask-versions'
 
 
+# CLI or important libs, softwares
+#try_use_arm_brew install 'geckodriver'
+#try_use_arm_brew install 'htop'
 try_use_arm_brew install 'advancecomp'
 try_use_arm_brew install 'ansible'
+try_use_arm_brew install 'bottom'
 try_use_arm_brew install 'emojify'
-try_use_arm_brew install 'geckodriver'
 try_use_arm_brew install 'gifsicle'
 try_use_arm_brew install 'git'
 try_use_arm_brew install 'graphviz'
 try_use_arm_brew install 'heroku'
-try_use_arm_brew install 'htop'
 try_use_arm_brew install 'httpie'
 try_use_arm_brew install 'imagemagick'
 try_use_arm_brew install 'jhead'
@@ -73,7 +78,9 @@ try_use_arm_brew install 'perl'
 try_use_arm_brew install 'pinentry-mac'
 try_use_arm_brew install 'pngcrush'
 try_use_arm_brew install 'pngquant'
+try_use_arm_brew install 'postgresql'
 try_use_arm_brew install 'puma-dev'
+try_use_arm_brew install 'readline'
 try_use_arm_brew install 'readline'
 try_use_arm_brew install 'ssh-copy-id'
 try_use_arm_brew install 'svn'
@@ -85,50 +92,55 @@ try_use_arm_brew install 'watchman'
 try_use_arm_brew install 'yarn'
 try_use_arm_brew install 'zsh'
 
-try_use_arm_brew install --cask 'alfred3'
-try_use_arm_brew install --cask 'appcleaner'
-try_use_arm_brew install --cask 'iterm2'
-try_use_arm_brew install --cask 'dropbox'
-try_use_arm_brew install --cask 'karabiner-elements'
-try_use_arm_brew install --cask 'keka'
-try_use_arm_brew install --cask 'keybase'
-try_use_arm_brew install --cask 'ngrok'
-try_use_arm_brew install --cask 'sequel-pro'
-try_use_arm_brew install --cask 'psequel'
-try_use_arm_brew install --cask 'flux'
-try_use_arm_brew install --cask 'discord'
-
-try_use_arm_brew install --cask 'font-fira-code'
+# Fonts
 try_use_arm_brew install --cask 'font-source-code-pro-for-powerline'
-try_use_arm_brew install --cask 'font-hack-nerd-font'
 try_use_arm_brew install --cask 'font-public-sans'
 try_use_arm_brew install --cask 'font-jetbrains-mono-nerd-font'
+try_use_arm_brew install --cask 'font-ibm-plex-mono'
 
-try_use_arm_brew install --cask 'fork'
-try_use_arm_brew install --cask 'imageoptim'
-try_use_arm_brew install --cask 'insomnia'
-try_use_arm_brew install --cask 'postman'
-try_use_arm_brew install --cask 'vagrant'
-try_use_arm_brew install --cask 'vagrant-manager'
-try_use_arm_brew install --cask 'xquartz'
-try_use_arm_brew install --cask 'sketch'
-try_use_arm_brew install --cask 'calibre'
-try_use_arm_brew install --cask 'sigil'
-try_use_arm_brew install --cask 'spotify'
-try_use_arm_brew install --cask 'subler'
-try_use_arm_brew install --cask 'transmission'
-try_use_arm_brew install --cask 'geotag-photos-pro'
-try_use_arm_brew install --cask 'openemu'
-
-try_use_arm_brew install --cask 'google-chrome'
+# Browsers
+#try_use_arm_brew install --cask 'google-chrome'
+#try_use_arm_brew install --cask 'microsoft-edge'
+try_use_arm_brew install --cask 'brave-browser'
 try_use_arm_brew install --cask 'firefox-developer-edition'
-try_use_arm_brew install --cask 'microsoft-edge'
 try_use_arm_brew install --cask 'welly'
 
-try_use_x86_brew install 'postgresql'
-try_use_x86_brew install 'readline'
+# Applications
+#try_use_arm_brew install --cask 'flux'
+#try_use_arm_brew install --cask 'geotag-photos-pro'
+#try_use_arm_brew install --cask 'imageoptim'
+#try_use_arm_brew install --cask 'insomnia'
+#try_use_arm_brew install --cask 'keybase'
+#try_use_arm_brew install --cask 'postman'
+#try_use_arm_brew install --cask 'sequel-pro'
+#try_use_arm_brew install --cask 'sketch'
+#try_use_arm_brew install --cask 'spotify'
+#try_use_arm_brew install --cask 'subler'
+#try_use_arm_brew install --cask 'transmission'
+#try_use_arm_brew install --cask 'xquartz'
+try_use_arm_brew install --cask 'alfred'
+try_use_arm_brew install --cask 'appcleaner'
+try_use_arm_brew install --cask 'calibre'
+try_use_arm_brew install --cask 'discord'
+try_use_arm_brew install --cask 'docker'
+try_use_arm_brew install --cask 'dropbox'
+try_use_arm_brew install --cask 'figma'
+try_use_arm_brew install --cask 'figmadaemon'
+try_use_arm_brew install --cask 'fork'
+try_use_arm_brew install --cask 'iterm2'
+try_use_arm_brew install --cask 'karabiner-elements'
+try_use_arm_brew install --cask 'keka'
+try_use_arm_brew install --cask 'ngrok'
+try_use_arm_brew install --cask 'openemu'
+try_use_arm_brew install --cask 'rubymine'
+try_use_arm_brew install --cask 'sigil'
+try_use_arm_brew install --cask 'slack-beta'
+try_use_arm_brew install --cask 'vagrant'
+try_use_arm_brew install --cask 'vagrant-manager'
+try_use_arm_brew install --cask 'visual-studio-code'
 
-try_use_arm_brew bundle --file=-<<EOF
+if [ "$(version "$osx_version")" -lt "$(version "12.0")" ]; then
+  try_use_arm_brew bundle --file=-<<EOF
 mas 'Keynote', id: 409_183_694
 mas 'Pages', id: 409_201_541
 mas 'Numbers', id: 409_203_825
@@ -140,6 +152,7 @@ mas 'Spark', id: 1_176_895_641
 mas 'Moom', id: 419_330_170
 mas 'LINE', id: 539_883_307
 EOF
+fi
 
-try_use_arm_brew doctor && try_use_arm_brew update && try_use_arm_brew cleanup && try_use_arm_brew upgrade && try_use_arm_brew cask upgrade && mas upgrade
+try_use_arm_brew doctor && try_use_arm_brew update && try_use_arm_brew cleanup && try_use_arm_brew upgrade && try_use_arm_brew cask upgrade
 try_use_x86_brew doctor && try_use_x86_brew update && try_use_x86_brew cleanup && try_use_x86_brew upgrade && try_use_x86_brew cask upgrade
