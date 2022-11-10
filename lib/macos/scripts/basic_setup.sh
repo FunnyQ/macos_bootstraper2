@@ -40,7 +40,7 @@ if [ "$(version "$osx_version")" -lt "$(version "$required_osx_version")" ]; the
   exit
 fi
 
-echo "Installing XCode CL tools.."
+echo "Installing XCode CLI tools.."
 xcode-select --install
 
 # identify CPU architecture
@@ -69,7 +69,7 @@ if [[ $(command -v brew) == "" ]]; then
   fi
   echo "Installing Homebrew in x86 arch.. "
   try_use_x86 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  echo 'export PATH=/usr/local/homebrew/bin:$PATH' >> $HOME/.zshrc
+  echo 'export PATH=/usr/local/bin:$PATH' >> $HOME/.zshrc
 else
   echo "Updating Homebrew.. "
   brew update
@@ -85,10 +85,13 @@ try_use_arm_brew install libevent
 try_use_arm_brew install libtool
 try_use_arm_brew install libyaml
 try_use_arm_brew install vim
-try_use_arm_brew install z
+try_use_arm_brew install zoxide
 try_use_arm_brew install bat
 try_use_arm_brew install exa
 try_use_arm_brew install mas
+try_use_arm_brew install mackup
+try_use_arm_brew install fzf
+
 
 if [ ! -f ~/.oh-my-zsh ]; then
   info_echo "Installing o-my-zsh..."
@@ -109,7 +112,7 @@ source ~/.zshrc
 fi
 
 # install ruby
-ruby_version="3.0.2"
+ruby_version="3.1.2"
 info_echo "ensure Ruby $ruby_version installed..."
 if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
   # set bundler as default gems
@@ -132,7 +135,7 @@ fi
 
 # install nodejs
 info_echo "Install Node.js LTS version"
-nodejs_version="14.18.1"
+nodejs_version="lts-gallium"
 if test -z "$(asdf list nodejs --bare|grep $nodejs_version)"; then
 
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git

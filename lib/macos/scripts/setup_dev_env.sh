@@ -52,7 +52,7 @@ try_use_arm_brew tap 'homebrew/cask-versions'
 
 # CLI or important libs, softwares
 #try_use_arm_brew install 'geckodriver'
-#try_use_arm_brew install 'htop'
+try_use_arm_brew install 'htop'
 try_use_arm_brew install 'advancecomp'
 try_use_arm_brew install 'ansible'
 try_use_arm_brew install 'bottom'
@@ -62,7 +62,6 @@ try_use_arm_brew install 'git'
 try_use_arm_brew install 'gnu-sed'
 try_use_arm_brew install 'gping'
 try_use_arm_brew install 'graphviz'
-try_use_arm_brew install 'heroku'
 try_use_arm_brew install 'httpie'
 try_use_arm_brew install 'imagemagick'
 try_use_arm_brew install 'jhead'
@@ -70,7 +69,6 @@ try_use_arm_brew install 'jonof/kenutils/pngout'
 try_use_arm_brew install 'jpeg'
 try_use_arm_brew install 'jpegoptim'
 try_use_arm_brew install 'libpq'
-try_use_arm_brew install 'mackup'
 try_use_arm_brew install 'optipng'
 try_use_arm_brew install 'overmind'
 try_use_arm_brew install 'perl'
@@ -79,7 +77,6 @@ try_use_arm_brew install 'pngcrush'
 try_use_arm_brew install 'pngquant'
 try_use_arm_brew install 'postgresql'
 try_use_arm_brew install 'puma-dev'
-try_use_arm_brew install 'readline'
 try_use_arm_brew install 'readline'
 try_use_arm_brew install 'ssh-copy-id'
 try_use_arm_brew install 'svn'
@@ -100,59 +97,67 @@ try_use_arm_brew install --cask 'font-ibm-plex-mono'
 # Browsers
 #try_use_arm_brew install --cask 'google-chrome'
 #try_use_arm_brew install --cask 'microsoft-edge'
-try_use_arm_brew install --cask 'brave-browser'
+#try_use_arm_brew install --cask 'brave-browser'
+try_use_arm_brew install --cask 'sigmaos'
 try_use_arm_brew install --cask 'firefox-developer-edition'
 try_use_arm_brew install --cask 'welly'
 
 # Applications
-#try_use_arm_brew install --cask 'flux'
-#try_use_arm_brew install --cask 'geotag-photos-pro'
-#try_use_arm_brew install --cask 'imageoptim'
-#try_use_arm_brew install --cask 'insomnia'
-#try_use_arm_brew install --cask 'keybase'
-#try_use_arm_brew install --cask 'postman'
-#try_use_arm_brew install --cask 'sequel-pro'
-#try_use_arm_brew install --cask 'sketch'
+#try_use_arm_brew install --cask 'flux'                # only if monitor not support for night shift
+#try_use_arm_brew install --cask 'imageoptim'          # compress images
+#try_use_arm_brew install --cask 'insomnia'            # paw alternative
+#try_use_arm_brew install --cask 'keybase'             # SNS public keys management
+#try_use_arm_brew install --cask 'postman'             # only if need co-work with postman user
+#try_use_arm_brew install --cask 'sequel-pro'          # use TablePlus instead
+#try_use_arm_brew install --cask 'sketch'              # use sketch workspace web reader instead
 #try_use_arm_brew install --cask 'spotify'
-#try_use_arm_brew install --cask 'subler'
-#try_use_arm_brew install --cask 'transmission'
-#try_use_arm_brew install --cask 'xquartz'
+#try_use_arm_brew install --cask 'subler'              # only if you still need to deal with encoding issues of str files
+#try_use_arm_brew install --cask 'transmission'        # only if you still use BT for download stuff
+#try_use_arm_brew install --cask 'xquartz'             # only if image process have issues
 try_use_arm_brew install --cask 'alfred'
-try_use_arm_brew install --cask 'appcleaner'
+#try_use_arm_brew install --cask 'appcleaner'          # use CleanMyMac instead
 try_use_arm_brew install --cask 'calibre'
-try_use_arm_brew install --cask 'discord'
-try_use_arm_brew install --cask 'disk-inventory-x'
+#try_use_arm_brew install --cask 'discord'             # use web app instead
+#try_use_arm_brew install --cask 'disk-inventory-x'    # use CleanMyMac instead
 try_use_arm_brew install --cask 'docker'
 try_use_arm_brew install --cask 'dropbox'
-try_use_arm_brew install --cask 'figma'
-try_use_arm_brew install --cask 'figmadaemon'
+#try_use_arm_brew install --cask 'figma'               # use web app instead
+#try_use_arm_brew install --cask 'figmadaemon'         # only if there are font issues in figma
+#try_use_arm_brew install --cask 'fliqlo'              # screen saver, use epoch-flip-clock instead
+try_use_arm_brew install --cask 'epoch-flip-clock'
 try_use_arm_brew install --cask 'fork'
 try_use_arm_brew install --cask 'iterm2'
+try_use_arm_brew install --cask 'jetbrains-toolbox'
 try_use_arm_brew install --cask 'karabiner-elements'
 try_use_arm_brew install --cask 'keka'
 try_use_arm_brew install --cask 'kobo'
-try_use_arm_brew install --cask 'ngrok'
-try_use_arm_brew install --cask 'notion'
-try_use_arm_brew install --cask 'openemu'
-try_use_arm_brew install --cask 'rubymine'
+#try_use_arm_brew install --cask 'ngrok'               # not support custom domain (example.test) for free
+#try_use_arm_brew install --cask 'notion'              # use web app instead
+#try_use_arm_brew install --cask 'openemu'
+#try_use_arm_brew install --cask 'rubymine'            # use jetbrains-toolbox for manage versions and more features
 try_use_arm_brew install --cask 'sigil'
-try_use_arm_brew install --cask 'slack-beta'
+#try_use_arm_brew install --cask 'slack'               # use web app instead
 try_use_arm_brew install --cask 'vagrant'
 try_use_arm_brew install --cask 'vagrant-manager'
 try_use_arm_brew install --cask 'visual-studio-code'
-try_use_arm_brew install --cask 'zeplin'
+#try_use_arm_brew install --cask 'zeplin'              # use sketch workspace web reader instead
 
 try_use_arm_brew bundle --file=-<<EOF
-mas 'Keynote', id: 409_183_694
-mas 'Pages', id: 409_201_541
-mas 'Numbers', id: 409_203_825
 mas '1Password', id: 443_987_910
-mas 'OpenConv', id: 892_308_325
-mas 'iStat Menus', id: 1_319_778_037
+mas 'Affinity Photo', id: 824183456
 mas 'Byword', id: 420_212_497
-mas 'Spark', id: 1_176_895_641
-mas 'Moom', id: 419_330_170
+mas 'Dark Reader for Safari', id: 1438243180
+mas 'Furiganify!', id: 1151320968
+mas 'Keynote', id: 409_183_694
 mas 'LINE', id: 539_883_307
+mas 'Moom', id: 419_330_170
+mas 'NepTunes', id: 1006739057
+mas 'Numbers', id: 409_203_825
+mas 'Octotree', id: 1457450145
+mas 'OpenConv', id: 892_308_325
+mas 'Pages', id: 409_201_541
+mas 'Spark', id: 1_176_895_641
+mas 'iStat Menus', id: 1_319_778_037
 EOF
 fi
 
