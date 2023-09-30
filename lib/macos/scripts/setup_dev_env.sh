@@ -60,7 +60,6 @@ try_use_arm_brew install 'emojify'
 try_use_arm_brew install 'gifsicle'
 try_use_arm_brew install 'git'
 try_use_arm_brew install 'gnu-sed'
-try_use_arm_brew install 'gping'
 try_use_arm_brew install 'graphviz'
 try_use_arm_brew install 'httpie'
 try_use_arm_brew install 'imagemagick'
@@ -89,18 +88,17 @@ try_use_arm_brew install 'yarn'
 try_use_arm_brew install 'zsh'
 
 # Fonts
-try_use_arm_brew install --cask 'font-source-code-pro-for-powerline'
-try_use_arm_brew install --cask 'font-public-sans'
-try_use_arm_brew install --cask 'font-jetbrains-mono-nerd-font'
-try_use_arm_brew install --cask 'font-ibm-plex-mono'
+#try_use_arm_brew install --cask 'font-source-code-pro-for-powerline'
+try_use_arm_brew install --cask 'font-meslo-lg-nerd-font' # best font for iTerm
+#try_use_arm_brew install --cask 'font-public-sans'
+#try_use_arm_brew install --cask 'font-jetbrains-mono-nerd-font'
+#try_use_arm_brew install --cask 'font-ibm-plex-mono'
 
 # Browsers
-#try_use_arm_brew install --cask 'google-chrome'
-#try_use_arm_brew install --cask 'microsoft-edge'
-#try_use_arm_brew install --cask 'brave-browser'
+try_use_arm_brew install --cask 'arc'
 try_use_arm_brew install --cask 'sigmaos'
 try_use_arm_brew install --cask 'firefox-developer-edition'
-try_use_arm_brew install --cask 'welly'
+#try_use_arm_brew install --cask 'welly'
 
 # Applications
 #try_use_arm_brew install --cask 'flux'                # only if monitor not support for night shift
@@ -114,19 +112,20 @@ try_use_arm_brew install --cask 'welly'
 #try_use_arm_brew install --cask 'subler'              # only if you still need to deal with encoding issues of str files
 #try_use_arm_brew install --cask 'transmission'        # only if you still use BT for download stuff
 #try_use_arm_brew install --cask 'xquartz'             # only if image process have issues
+#try_use_arm_brew install --cask 'amethyst'
 try_use_arm_brew install --cask 'alfred'
-#try_use_arm_brew install --cask 'appcleaner'          # use CleanMyMac instead
 try_use_arm_brew install --cask 'calibre'
 #try_use_arm_brew install --cask 'discord'             # use web app instead
-#try_use_arm_brew install --cask 'disk-inventory-x'    # use CleanMyMac instead
-try_use_arm_brew install --cask 'docker'
 try_use_arm_brew install --cask 'dropbox'
+try_use_arm_brew install --cask 'setapp'
 #try_use_arm_brew install --cask 'figma'               # use web app instead
 #try_use_arm_brew install --cask 'figmadaemon'         # only if there are font issues in figma
 #try_use_arm_brew install --cask 'fliqlo'              # screen saver, use epoch-flip-clock instead
+try_use_arm_brew install --cask 'elgato-stream-deck'
 try_use_arm_brew install --cask 'epoch-flip-clock'
 try_use_arm_brew install --cask 'fork'
 try_use_arm_brew install --cask 'iterm2'
+try_use_arm_brew install --cask 'cool-retro-term'
 try_use_arm_brew install --cask 'jetbrains-toolbox'
 try_use_arm_brew install --cask 'karabiner-elements'
 try_use_arm_brew install --cask 'keka'
@@ -137,15 +136,18 @@ try_use_arm_brew install --cask 'kobo'
 #try_use_arm_brew install --cask 'rubymine'            # use jetbrains-toolbox for manage versions and more features
 try_use_arm_brew install --cask 'sigil'
 #try_use_arm_brew install --cask 'slack'               # use web app instead
-try_use_arm_brew install --cask 'vagrant'
-try_use_arm_brew install --cask 'vagrant-manager'
+#try_use_arm_brew install --cask 'vagrant'
+#try_use_arm_brew install --cask 'vagrant-manager'
 try_use_arm_brew install --cask 'visual-studio-code'
+try_use_arm_brew install --cask 'obsidian'
+try_use_arm_brew install --cask 'orbstack'
+#try_use_arm_brew install --cask 'topnotch'
+try_use_arm_brew install --cask 'warp'
 #try_use_arm_brew install --cask 'zeplin'              # use sketch workspace web reader instead
 
 try_use_arm_brew bundle --file=-<<EOF
 mas '1Password', id: 443_987_910
 mas 'Affinity Photo', id: 824183456
-mas 'Byword', id: 420_212_497
 mas 'Dark Reader for Safari', id: 1438243180
 mas 'Furiganify!', id: 1151320968
 mas 'Keynote', id: 409_183_694
@@ -156,7 +158,6 @@ mas 'Numbers', id: 409_203_825
 mas 'Octotree', id: 1457450145
 mas 'OpenConv', id: 892_308_325
 mas 'Pages', id: 409_201_541
-mas 'Spark', id: 1_176_895_641
 mas 'iStat Menus', id: 1_319_778_037
 EOF
 fi

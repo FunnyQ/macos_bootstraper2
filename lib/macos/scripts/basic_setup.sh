@@ -72,7 +72,8 @@ if [[ $(command -v brew) == "" ]]; then
   echo 'export PATH=/usr/local/bin:$PATH' >> $HOME/.zshrc
 else
   echo "Updating Homebrew.. "
-  brew update
+  try_use_arm_brew update
+  try_use_x86_brew update
 fi
 
 # install basic tools via homebrew
@@ -112,7 +113,7 @@ source ~/.zshrc
 fi
 
 # install ruby
-ruby_version="3.1.2"
+ruby_version="3.2.0"
 info_echo "ensure Ruby $ruby_version installed..."
 if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
   # set bundler as default gems

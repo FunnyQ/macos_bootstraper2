@@ -75,7 +75,7 @@ module I18n
 
         def exists?(locale, key)
           backends.any? do |backend|
-            backend.exists?(locale, key)
+            backend.exist?(locale, key)
           end
         end
 

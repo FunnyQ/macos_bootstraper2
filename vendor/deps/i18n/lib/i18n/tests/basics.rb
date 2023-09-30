@@ -44,7 +44,7 @@ module I18n
 
       test "exists? is implemented by the backend" do
         I18n.backend.store_translations(:foo, :bar => 'baz')
-        assert I18n.exists?(:bar, :foo)
+        assert I18n.exist?(:bar, :foo)
       end
 
       test "storing a nil value as a translation removes it from the available locale data" do

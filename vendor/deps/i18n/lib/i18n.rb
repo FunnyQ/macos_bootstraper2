@@ -211,7 +211,7 @@ module I18n
       locale ||= config.locale
       raise Disabled.new('exists?') if locale == false
       raise I18n::ArgumentError if key.is_a?(String) && key.empty?
-      config.backend.exists?(locale, key)
+      config.backend.exist?(locale, key)
     end
 
     # Transliterates UTF-8 characters to ASCII. By default this method will

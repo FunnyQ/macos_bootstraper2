@@ -9,7 +9,7 @@ module Macos
     end
 
     def self.current_locale
-      if File.exists?(LOCALE_PREFERENCES_PATH)
+      if File.exist?(LOCALE_PREFERENCES_PATH)
         preferences_file = File.open(LOCALE_PREFERENCES_PATH)
 
         preferences_file.readline
