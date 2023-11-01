@@ -113,7 +113,7 @@ source ~/.zshrc
 fi
 
 # install ruby
-ruby_version="3.2.0"
+ruby_version="3.2.2"
 info_echo "ensure Ruby $ruby_version installed..."
 if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
   # set bundler as default gems
