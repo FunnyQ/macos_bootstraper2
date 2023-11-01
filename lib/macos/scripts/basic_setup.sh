@@ -96,7 +96,7 @@ try_use_arm_brew install fzf
 
 if [ ! -f ~/.oh-my-zsh ]; then
   info_echo "Installing o-my-zsh..."
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 # config for asdf
