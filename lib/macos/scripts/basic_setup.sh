@@ -31,7 +31,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Check macOS version
-required_osx_version="11.1"
+required_osx_version="15.0"
 osx_version=$(/usr/bin/sw_vers -productVersion)
 
 info_echo "Checking macOS version"
@@ -64,11 +64,11 @@ fi
 if [[ $(command -v brew) == "" ]]; then
   if [[ $cpu_architecture == "arm64" ]]; then
     echo "Installing Homebrew in arm64 arch.. "
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     echo 'export PATH=/opt/homebrew/bin:$PATH' >> $HOME/.zshrc
   fi
   echo "Installing Homebrew in x86 arch.. "
-  try_use_x86 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  try_use_x86 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   echo 'export PATH=/usr/local/bin:$PATH' >> $HOME/.zshrc
 else
   echo "Updating Homebrew.. "
@@ -88,7 +88,7 @@ try_use_arm_brew install libyaml
 try_use_arm_brew install vim
 try_use_arm_brew install zoxide
 try_use_arm_brew install bat
-try_use_arm_brew install exa
+try_use_arm_brew install eza
 try_use_arm_brew install mas
 try_use_arm_brew install mackup
 try_use_arm_brew install fzf
@@ -102,7 +102,7 @@ fi
 # config for asdf
 if [ ! -f ~/.asdfrc ]; then
   info_echo "install asdf"
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
   echo '. $HOME/.asdf/asdf.sh' >> $HOME/.zshrc
   info_echo ".asdfrc not existed, will create one for support legacy version files..."
 cat > ~/.asdfrc <<EOF
@@ -113,7 +113,7 @@ source ~/.zshrc
 fi
 
 # install ruby
-ruby_version="3.2.2"
+ruby_version="3.3.5"
 info_echo "ensure Ruby $ruby_version installed..."
 if test -z "$(asdf list ruby --bare|grep $ruby_version)"; then
   # set bundler as default gems
@@ -136,7 +136,7 @@ fi
 
 # install nodejs
 info_echo "Install Node.js LTS version"
-nodejs_version="lts-gallium"
+nodejs_version="20.17.0"
 if test -z "$(asdf list nodejs --bare|grep $nodejs_version)"; then
 
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
